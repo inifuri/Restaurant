@@ -17,6 +17,8 @@ class Pedido extends Migration
             $table->increments('id');
             $table->integer('idMesa');
             $table->integer('idGarzon');
+            $table->integer('idCuenta');
+            $table->boolean('pedido');
             $table->timestamps();
         });
     }
