@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DetalleCuenta extends Migration
+class DetalleProducto extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class DetalleCuenta extends Migration
      */
     public function up()
     {
-        Schema::create('detalleCuenta', function (Blueprint $table) {
+        Schema::create('detalleProducto', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idCuenta');
             $table->integer('idProducto');
@@ -30,6 +30,6 @@ class DetalleCuenta extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalleCuenta');
+        Schema::dropIfExists('detalleProducto');
     }
 }
