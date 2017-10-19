@@ -35,6 +35,7 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
+
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
@@ -70,8 +71,10 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <div class="container">
+          @include('layouts._messages')
+          @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->

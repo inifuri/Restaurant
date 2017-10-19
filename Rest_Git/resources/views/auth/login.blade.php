@@ -35,7 +35,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                <!--form-stars-here-->
                 <div class="wthree-form">
                     <h2>Inciar sesión</h2>
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+
+
+                    <form class="form-horizontal" method="POST" action="{{ route('log.store') }}">
                         {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                 <div class="form-sub-w3">
@@ -62,8 +64,14 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                                             <strong>{{ $errors->first('password') }}</strong>
                                         </span>
                                     @endif
+
                                 </div>
                             </div>
+                           @if($errors->any())
+                                <label class="anim">
+                                    <span>{{ $errors->first() }}</span>
+                                </label>
+                            @endif
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">

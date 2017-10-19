@@ -2,7 +2,11 @@
 
 namespace rest\Http\Controllers;
 
+use rest\Cuenta;
 use Illuminate\Http\Request;
+use rest\Http\Requests\UpdateCuentaRequest;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class CuentaController extends Controller
 {
@@ -13,7 +17,9 @@ class CuentaController extends Controller
      */
     public function index()
     {
-        //
+      $cuentas = new Cuenta;
+      $cuentas = Cuenta::all();
+      return view('cuentas.index')->with('cuentas',$cuentas);
     }
 
     /**
@@ -23,7 +29,8 @@ class CuentaController extends Controller
      */
     public function create()
     {
-        //
+      $cuenta = new Cuenta;
+      return view('cuentas.create')->with('cuenta',$cuenta);
     }
 
     /**
@@ -34,7 +41,11 @@ class CuentaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $cuenta = new Cuenta;
+      $cuenta->fill( $request->only('id','idGarzon','idMesa','fecha') );
+      $cuenta->save();
+      session()->flash('message','Cuenta Creada!');
+      return redirect()->route('cuentas_path');
     }
 
     /**
@@ -54,9 +65,9 @@ class CuentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cuenta $cuenta)
     {
-        //
+        return view('cuentas.edit')->with(['cuenta' => $cuenta]);
     }
 
     /**
@@ -66,9 +77,13 @@ class CuentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($cuenta, UpdateCuentaRequest $request)
     {
-        //
+      $cuenta = Cuenta::find($cuenta);
+      $cuenta->fill( $request->only('id','idGarzon','idMesa','fecha') );
+      $cuenta->save();
+      session()->flash('message','Cuenta Modificada!');
+      return redirect()->route('cuentas_path');
     }
 
     /**
@@ -79,6 +94,9 @@ class CuentaController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $cuenta = Cuenta::find($id);
+      $cuenta->delete();
+      session()->flash('message','Cuenta Eliminada!');
+      return redirect()->route('cuentas_path');
     }
 }

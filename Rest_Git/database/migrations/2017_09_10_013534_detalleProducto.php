@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DetalleProducto extends Migration
+class detalleProducto extends Migration
 {
     /**
      * Run the migrations.
@@ -30,6 +30,6 @@ class DetalleProducto extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalleProducto');
+        Schema::dropIfExists('detalleCuenta');
     }
 }

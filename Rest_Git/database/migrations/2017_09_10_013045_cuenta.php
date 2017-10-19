@@ -17,7 +17,6 @@ class Cuenta extends Migration
             $table->increments('id');
             $table->integer('idGarzon');
             $table->integer('idMesa');
-            $table->datetime('fecha');
             $table->timestamps();
         });
     }
