@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace rest;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'password', 'nombres', 'apellidos', 'email', 'categoria'
     ];
 
     /**
@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function setPasswordAttributes($valor){
+      if (!empty($valor)){
+          $this->attributes['password'] = \Hash::make($valor);
+      }
+    }
 }
