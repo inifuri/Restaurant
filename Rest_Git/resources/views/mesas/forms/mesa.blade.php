@@ -5,8 +5,11 @@
 	</div>
 	<div class="form-group">
 		{!!Form::label('estado','Estado:')!!}
-		{!!Form::text('estado',null,['class'=>'form-control','placeholder'=>'Ingresa el Estado de la Mesa'])!!}
+		{!!Form::select('estado', ['1' => 'Disponible', '0' => 'No Disponible'], '1')!!}
 	</div>
-
+	<div class="form-group">
+		{!!Form::label('idGarzon','Garzón:')!!}
+		{!!Form::select('idGarzon', $garzones, ['class' => 'form-control'])!!}
+	</div>
 
 </div>

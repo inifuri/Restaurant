@@ -3,6 +3,8 @@
 namespace rest\Http\Controllers;
 
 use rest\Cuenta;
+use rest\Mesa;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use rest\Http\Requests\UpdateCuentaRequest;
 use Illuminate\Support\Facades\Session;
@@ -29,8 +31,10 @@ class CuentaController extends Controller
      */
     public function create()
     {
+      $mesas = DB::table('mesa')->where('estado','1')->pluck('id','id');
+      $garzones = DB::table('users')->where('categoria', 'Garzon')->pluck('username','id');
       $cuenta = new Cuenta;
-      return view('cuentas.create')->with('cuenta',$cuenta);
+      return view('cuentas.create', compact('mesas', 'garzones'))->with('cuenta',$cuenta);
     }
 
     /**
@@ -45,6 +49,7 @@ class CuentaController extends Controller
       $cuenta->fill( $request->only('id','idGarzon','idMesa','fecha') );
       $cuenta->save();
       session()->flash('message','Cuenta Creada!');
+      //cambiar estado de la mesa a cero
       return redirect()->route('cuentas_path');
     }
 

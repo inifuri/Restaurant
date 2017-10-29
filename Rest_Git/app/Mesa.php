@@ -9,6 +9,6 @@ class Mesa extends Model{
 
   protected $table = 'mesa';
 
-  protected $fillable = ['id', 'estado'];
+  protected $fillable = ['id', 'estado', 'idGarzon'];
 
 }

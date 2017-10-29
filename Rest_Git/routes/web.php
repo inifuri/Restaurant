@@ -33,7 +33,7 @@ Route::name('mesas_path')->get('/mesas', 'MesasController@index');
 Route::name('create_mesa_path')->get('/mesas/create','MesasController@create');
 Route::name('store_mesa_path')->post('/mesas','MesasController@store');
 Route::name('edit_mesa_path')->get('/mesas/{mesa}/edit','MesasController@edit');
-Route::name('update_mesa_path')->put('/mesas/{post}','MesasController@update');
+
 Route::name('delete_mesa_path')->delete('/mesas/{post}','MesasController@delete');
 
 Route::resource('producto', 'ProductosController');

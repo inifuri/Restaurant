@@ -15,7 +15,8 @@ class Mesa extends Migration
     {
         Schema::create('mesa', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('estado')->default('0');
+            $table->boolean('estado')->default('1');
+            $table->integer('idGarzon')->default('0');
             $table->timestamps();
         });
     }

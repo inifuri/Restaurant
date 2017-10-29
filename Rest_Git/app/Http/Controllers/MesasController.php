@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use rest\Http\Requests\UpdateMesaRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use rest\User;
+use Illuminate\Support\Facades\DB;
 
 class MesasController extends Controller
 {
@@ -30,7 +32,8 @@ class MesasController extends Controller
     public function create()
     {
         $mesa = new Mesa;
-        return view('mesas.create')->with('mesa',$mesa);
+        $garzones = DB::table('users')->where('categoria', 'Garzón')->pluck('username','id');
+        return view('mesas.create', compact('garzones'))->with('mesa',$mesa);
     }
 
     /**
@@ -66,7 +69,8 @@ class MesasController extends Controller
      */
     public function edit(Mesa $mesa)
     {
-        return view('mesas.edit')->with(['mesa' => $mesa]);
+        $garzones = DB::table('users')->where('categoria', 'Garzón')->pluck('username', 'id');
+        return view('mesas.edit', compact('garzones'))->with(['mesa' => $mesa]);
     }
 
     /**
@@ -79,7 +83,7 @@ class MesasController extends Controller
     public function update($mesa, UpdateMesaRequest $request)
     {
         $mesa = Mesa::find($mesa);
-        $mesa->fill( $request->only('id','estado') );
+        $mesa->fill( $request->only('id','estado','idGarzon'));
         $mesa->save();
         session()->flash('message','Mesa Modificada!');
         return redirect()->route('mesas_path');
