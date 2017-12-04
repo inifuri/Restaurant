@@ -69,8 +69,15 @@ class PedidosController extends Controller
       $pedido->fill( $request->only('id','idMesa','idGarzon','estado') );
       $pedido->save();
       $detalle = new Detalle;
-      $cuenta = DB::table('cuenta')->where('idMesa', $request->only('idMesa'))->pluck('id');
-      $detalle->fill('id',$cuenta,$request->only('producto', 'id', 'cantidad'));
+      $cuenta = DB::table('cuenta')->where('idMesa', $request->only('idMesa'))->max('id');
+     // $detalle->fill('id',$cuenta,$request->only('producto', 'id', 'cantidad'));
+     $idpedido = DB::table('pedido')->max('id');
+     $arrayName = array('idCuenta' => $cuenta ,
+                           'idPedido' =>$idpedido,
+                          'idProducto' => $request->get('producto'),
+                            'cantidad'=>  $request->get('cantidad') );
+
+      $detalle->fill($arrayName);
       $detalle->save();
       session()->flash('message','Pedido Creado!');
       return redirect()->route('pedidos_path');

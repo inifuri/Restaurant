@@ -18,7 +18,7 @@
 		&nbsp;
 		&nbsp;
 		{!!Form::label('cantidad', 'Cantidad:')!!}
-		<input type="number" name="cantidad" min="0">
+			{!!Form::input('number','cantidad', null, ['min'=> 0, 'size'=> '5' , 'class' => 'form-control'] )!!}
 	</div>
 	{!!Form::macro('prod', function(){
 		return Form::select('producto', $productos, ['class' => 'form-control']);
